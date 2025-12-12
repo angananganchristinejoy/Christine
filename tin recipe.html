@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chicken Adobo Recipe</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('https://images.unsplash.com/photo-1555939594-58d7cb561ad1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.3), rgba(255, 193, 7, 0.3), rgba(76, 175, 80, 0.3));
+            z-index: -1;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.6); /* transparent */
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+            backdrop-filter: blur(15px); /* blur background */
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        header {
+            background: rgba(255, 107, 107, 0.8);
+            color: white;
+            text-align: center;
+            padding: 30px;
+            font-size: 3em;
+            font-family: 'Dancing Script', cursive;
+            font-weight: 700;
+        }
+        .section {
+            padding: 20px;
+            border-bottom: 1px solid rgba(238, 238, 238, 0.3);
+        }
+        .section h2 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        .section h2 i {
+            margin-right: 10px;
+        }
+        ul, ol {
+            line-height: 1.6;
+        }
+        .ingredients {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 10px;
+        }
+        .ingredient-item {
+            background: rgba(255, 255, 255, 0.5);
+            padding: 10px;
+            border-radius: 8px;
+            border-left: 4px solid #ff6b6b;
+            transition: transform 0.2s;
+            backdrop-filter: blur(5px);
+        }
+        .ingredient-item:hover {
+            transform: scale(1.02);
+        }
+        .instructions {
+            counter-reset: step;
+        }
+        .instructions li {
+            counter-increment: step;
+            margin-bottom: 10px;
+        }
+        .instructions li::before {
+            content: counter(step) ". ";
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.4);
+            font-size: 0.9em;
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(255,255,255,0.3);
+        }
+        @media (max-width: 600px) {
+            header { font-size: 2em; }
+            .container { margin: 10px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <i class="fas fa-utensils"></i> Chicken Adobo Recipe
+        </header>
+        <div class="section">
+            <p>Chicken adobo is a classic Filipino dish featuring tender chicken marinated and simmered in a savory blend of soy sauce, vinegar, garlic, and spices. It's simple yet flavorful, perfect for a comforting meal. This recipe serves 4.</p>
+        </div>
+        <div class="section">
+            <h2><i class="fas fa-shopping-cart"></i> Ingredients</h2>
+            <div class="ingredients">
+                <div class="ingredient-item">2 lbs (about 1 kg) chicken thighs or drumsticks (bone-in for best flavor)</div>
+                <div class="ingredient-item">1/2 cup soy sauce</div>
+                <div class="ingredient-item">1/2 cup vinegar (white or apple cider)</div>
+                <div class="ingredient-item">1 head garlic, minced (about 10-12 cloves)</div>
+                <div class="ingredient-item">2 bay leaves</div>
+                <div class="ingredient-item">1 tsp whole peppercorns</div>
+                <div class="ingredient-item">1 cup water</div>
+                <div class="ingredient-item">2 tbsp cooking oil</div>
+                <div class="ingredient-item">Salt and pepper to taste (optional)</div>
+                <div class="ingredient-item">Optional: 1-2 tbsp brown sugar</div>
+            </div>
+        </div>
+        <div class="section">
+            <h2><i class="fas fa-list-ol"></i> Instructions</h2>
+            <ol class="instructions">
+                <li><strong>Marinate the Chicken:</strong> Combine chicken, soy sauce, vinegar, garlic, bay leaves, and peppercorns. Let marinate for 30 mins to 2 hours.</li>
+                <li><strong>Cook the Chicken:</strong> Heat oil, brown chicken, then add the marinade and water. Simmer for 25–30 mins.</li>
+                <li><strong>Adjust and Serve:</strong> Add salt, pepper, or sugar as desired. Serve with rice.</li>
+            </ol>
+        </div>
+        <div class="section">
+            <h2><i class="fas fa-lightbulb"></i> Tips</h2>
+            <p>For a twist, try adding potatoes or hard-boiled eggs during simmering. This dish tastes even better the next day!</p>
+        </div>
+        <footer>
+            Enjoy your homemade Chicken Adobo! <i class="fas fa-heart"></i>
+        </footer>
+    </div>
+</body>
+</html>

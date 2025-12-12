@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calories Converter</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Playfair Display', serif;
+            background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836') no-repeat center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0;
+        }
+
+        .card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.7);
+            width: 380px;
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            text-align: center;
+            animation: fadeIn 0.6s ease;
+
+            /* ★ MULTICOLOR BORDER ★ */
+            border: 6px solid transparent;
+            background-clip: padding-box, border-box;
+            background-origin: padding-box, border-box;
+            background-image:
+                linear-gradient( rgba(255,255,255,0.7), rgba(255,255,255,0.7) ),
+                linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet);
+        }
+
+        h2 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 12px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #ff5e57;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 17px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        button:hover {
+            background: #ff2e2a;
+        }
+
+        #result {
+            margin-top: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>Calories ↔ Kilo Converter</h2>
+
+    <input type="number" id="value" placeholder="Enter value"> 
+
+    <select id="type">
+        <option value="calToKj">Calories → Kilo</option>
+        <option value="kjToCal">Kilo → Calories</option>
+    </select>
+
+    <button onclick="convert()">Convert</button>
+
+    <p id="result"></p>
+</div>
+
+<script>
+function convert() {
+    let val = parseFloat(document.getElementById("value").value);
+    let type = document.getElementById("type").value;
+    let result = 0;
+
+    if (isNaN(val)) {
+        document.getElementById("result").innerHTML = "Please enter a valid number.";
+        return;
+    }
+
+    if (type === "calToKj") {
+        result = val * 4.184;
+        document.getElementById("result").innerHTML = `${val} cal = ${result.toFixed(2)} kJ`;
+    } else {
+        result = val * 0.239005736;
+        document.getElementById("result").innerHTML = `${val} kJ = ${result.toFixed(2)} cal`;
+    }
+}
+</script>
+
+</body>
+</html>

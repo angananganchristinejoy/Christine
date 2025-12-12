@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Classic Food Order Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 30px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #ff9800;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    #receipt {
+      margin-top: 20px;
+      padding: 15px;
+      background: #e8f5e9;
+      border-left: 5px solid #4caf50;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2> Food Order Form</h2>
+
+  <!-- Customer Info -->
+  <label>Full Name:</label>
+  <input type="text" id="c_name" placeholder="Enter full name">
+
+  <label>Contact Number:</label>
+  <input type="text" id="c_contact" placeholder="09xxxxxxxxx">
+
+  <!-- Order Section -->
+  <label>Food Item:</label>
+  <select id="food">
+    <option value="Burger" data-price="89">Burger - ₱89</option>
+    <option value="Pizza" data-price="159">Pizza - ₱159</option>
+    <option value="Spaghetti" data-price="99">Spaghetti - ₱99</option>
+    <option value="Fried Chicken" data-price="129">Fried Chicken - ₱129</option>
+    <option value="Sandwich" data-price="79">Sandwich - ₱79</option>
+  </select>
+
+  <label>Quantity:</label>
+  <input type="number" id="qty" min="1" value="1">
+
+  <!-- Payment -->
+  <label>Payment Method:</label>
+  <select id="payment">
+    <option value="COD">Cash on Delivery</option>
+    <option value="GCash">GCash</option>
+    <option value="Card">Debit/Credit Card</option>
+  </select>
+
+  <label>Amount Paid:</label>
+  <input type="number" id="paid" placeholder="Enter payment amount">
+
+  <button onclick="submitOrder()">Submit Order</button>
+
+  <!-- Receipt -->
+  <div id="receipt">
+    <h3>🧾 ORDER RECEIPT</h3>
+    <p id="r_name"></p>
+    <p id="r_contact"></p>
+    <hr>
+    <p id="r_food"></p>
+    <p id="r_qty"></p>
+    <p id="r_total"></p>
+    <p id="r_paid"></p>
+    <p id="r_change"></p>
+  </div>
+</div>
+
+<script>
+function submitOrder() {
+  let name = document.getElementById("c_name").value;
+  let contact = document.getElementById("c_contact").value;
+  let food = document.getElementById("food");
+  let qty = parseInt(document.getElementById("qty").value);
+  let paid = parseFloat(document.getElementById("paid").value);
+
+  let foodName = food.options[food.selectedIndex].value;
+  let foodPrice = parseInt(food.options[food.selectedIndex].dataset.price);
+
+  let total = foodPrice * qty;
+  let change = paid - total;
+
+  if (!name || !contact) {
+    alert("⚠ Please complete customer information.");
+    return;
+  }
+
+  if (paid < total) {
+    alert("⚠ Payment is insufficient! Total is ₱" + total);
+    return;
+  }
+
+  alert("✅ Order Successfully Submitted!");
+
+  document.getElementById("receipt").style.display = "block";
+  document.getElementById("r_name").innerText = "Customer Name: " + name;
+  document.getElementById("r_contact").innerText = "Contact: " + contact;
+  document.getElementById("r_food").innerText = "Food: " + foodName + " (₱" + foodPrice + ")";
+  document.getElementById("r_qty").innerText = "Quantity: " + qty;
+  document.getElementById("r_total").innerText = "Total Amount: ₱" + total;
+  document.getElementById("r_paid").innerText = "Amount Paid: ₱" + paid;
+  document.getElementById("r_change").innerText = "Change: ₱" + change;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Burger Order Form</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            background:
+                linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)),
+                url('bi.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: auto;
+            padding: 30px;
+
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(28px);
+            border-radius: 22px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.7);
+            border: 1px solid rgba(255,255,255,0.18);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 700;
+            color: #fff;
+            text-shadow: 0 3px 8px rgba(0,0,0,0.8);
+        }
+
+        label {
+            font-weight: 600;
+            color: #fff;
+        }
+
+        input, select {
+            width: 70%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.8);
+
+            background: #000;        
+            color: #fff !important; 
+            font-size: 14px;
+            display: block;
+        }
+
+        select option {
+            background: #000;
+            color: #fff;
+        }
+
+        input::placeholder {
+            color: #ddd !important;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: rgba(255, 152, 0, 0.90);
+            border: none;
+            border-radius: 12px;
+            font-size: 19px;
+            color: white;
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+        }
+
+        #receipt {
+            margin-top: 25px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 14px;
+            display: none;
+            border-left: 6px solid #ffcc33;
+        }
+
+        #receipt h3 {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>🍔 Burger Order Form</h2>
+
+    <!-- CUSTOMER INFO -->
+    <div class="section-title">Customer Information</div>
+
+    <label>Full Name:</label>
+    <input type="text" id="c_name" placeholder="Enter full name">
+
+    <label>Contact Number:</label>
+    <input type="text" id="c_contact" placeholder="09xxxxxxxxx">
+
+    <label>Email Address:</label>
+    <input type="text" id="c_email" placeholder="example@gmail.com">
+
+    <label>Complete Address:</label>
+    <input type="text" id="c_address" placeholder="House/Street/Barangay/City">
+
+    <!-- ORDER SECTION -->
+    <div class="section-title">Order Details</div>
+
+    <label>Burger Flavor:</label>
+    <select id="burger">
+        <option value="Classic Burger" data-price="89">Classic Burger - ₱89</option>
+        <option value="Cheese Burger" data-price="99">Cheese Burger - ₱99</option>
+        <option value="Double Patty" data-price="129">Double Patty - ₱129</option>
+        <option value="Bacon Burger" data-price="149">Bacon Burger - ₱149</option>
+        <option value="Pepper Mushroom" data-price="159">Pepper Mushroom - ₱159</option>
+        <option value="BBQ Burger" data-price="139">BBQ Burger - ₱139</option>
+    </select>
+
+    <label>Burger Quantity:</label>
+    <input type="number" id="qty_burger" min="1" value="1">
+
+    <label>Drinks:</label>
+    <select id="drinks">
+        <option value="None" data-price="0">None - ₱0</option>
+        <option value="Softdrinks" data-price="25">Softdrinks - ₱25</option>
+        <option value="Iced Tea" data-price="30">Iced Tea - ₱30</option>
+        <option value="Milk Tea" data-price="69">Milk Tea - ₱69</option>
+    </select>
+
+    <label>Drink Quantity:</label>
+    <input type="number" id="qty_drink" min="0" value="0">
+
+    <!-- PAYMENT -->
+    <div class="section-title">Payment Details</div>
+
+    <label>Payment Method:</label>
+    <select id="payment">
+        <option value="COD">Cash on Delivery (COD)</option>
+        <option value="GCash">GCash</option>
+        <option value="PayMaya">PayMaya</option>
+        <option value="Card">Debit / Credit Card</option>
+    </select>
+
+    <label>Amount Paid:</label>
+    <input type="number" id="paid" placeholder="Enter payment amount">
+
+    <button onclick="submitOrder()">Submit Order</button>
+
+    <!-- RECEIPT -->
+    <div id="receipt">
+        <h3>🧾 ORDER RECEIPT</h3>
+
+        <p id="r_name"></p>
+        <p id="r_contact"></p>
+        <p id="r_email"></p>
+        <p id="r_address"></p>
+
+        <hr>
+
+        <p id="r_burger"></p>
+        <p id="r_drink"></p>
+        <p id="r_qty_burger"></p>
+        <p id="r_qty_drink"></p>
+        <p id="r_total"></p>
+        <p id="r_paid"></p>
+        <p id="r_change"></p>
+    </div>
+</div>
+
+<script>
+function submitOrder() {
+    let name = document.getElementById("c_name").value;
+    let contact = document.getElementById("c_contact").value;
+    let email = document.getElementById("c_email").value;
+    let address = document.getElementById("c_address").value;
+
+    let burger = document.getElementById("burger");
+    let drink = document.getElementById("drinks");
+
+    let qtyBurger = parseInt(document.getElementById("qty_burger").value);
+    let qtyDrink = parseInt(document.getElementById("qty_drink").value);
+
+    let paid = parseFloat(document.getElementById("paid").value);
+
+    let burgerName = burger.options[burger.selectedIndex].value;
+    let burgerPrice = parseInt(burger.options[burger.selectedIndex].dataset.price);
+
+    let drinkName = drink.options[drink.selectedIndex].value;
+    let drinkPrice = parseInt(drink.options[drink.selectedIndex].dataset.price);
+
+    let total =
+        (burgerPrice * qtyBurger) +
+        (drinkPrice * qtyDrink);
+
+    let change = paid - total;
+
+    if (!name || !contact || !email || !address) {
+        alert("⚠ Please complete all customer information.");
+        return;
+    }
+
+    if (paid < total) {
+        alert("⚠ Payment is insufficient! Total is ₱" + total);
+        return;
+    }
+
+    alert("✅ Order Successfully Submitted!");
+
+    document.getElementById("receipt").style.display = "block";
+
+    document.getElementById("r_name").innerText = "Customer Name: " + name;
+    document.getElementById("r_contact").innerText = "Contact: " + contact;
+    document.getElementById("r_email").innerText = "Email: " + email;
+    document.getElementById("r_address").innerText = "Address: " + address;
+
+    document.getElementById("r_burger").innerText =
+        "Burger: " + burgerName + " (₱" + burgerPrice + ")";
+    document.getElementById("r_drink").innerText =
+        "Drink: " + drinkName + " (₱" + drinkPrice + ")";
+
+    document.getElementById("r_qty_burger").innerText =
+        "Burger Quantity: " + qtyBurger;
+
+    document.getElementById("r_qty_drink").innerText =
+        "Drink Quantity: " + qtyDrink;
+
+    document.getElementById("r_total").innerText = "Total Amount: ₱" + total;
+    document.getElementById("r_paid").innerText = "Amount Paid: ₱" + paid;
+    document.getElementById("r_change").innerText = "Change: ₱" + change;
+}
+</script>
+
+</body>
+</html>
